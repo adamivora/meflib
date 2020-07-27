@@ -45,38 +45,39 @@
 /**********************************  Library Includes  ******************************/
 /************************************************************************************/
 #ifdef _WIN32
-	#define _USE_MATH_DEFINES
+    #define _USE_MATH_DEFINES
 
-	#include <stdlib.h>
-	#include <stdio.h>
-	#include <string.h>
-	#include <time.h>
-	#include <math.h>
-	#include <float.h>
-	#include <sys/stat.h>
-	#include <stdarg.h>
-	#include <errno.h>
-	#include <fcntl.h>
-	#include <limits.h>
-	#include <malloc.h>  // for alloca()
-	#include <stdint.h>
-	#include <windows.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
+    #include <time.h>
+    #include <math.h>
+    #include <float.h>
+    #include <sys/stat.h>
+    #include <stdarg.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include <limits.h>
+    #include <malloc.h>  // for alloca()
+    #include <stdint.h>
+    #include <windows.h>
 
 #else
-	#include <stdlib.h>
-	#include <unistd.h>
-	#include <stdio.h>
-	#include <string.h>
-	#include <sys/time.h>
-	#include <math.h>
-	#include <float.h>
-	#include <sys/stat.h>
-	#include <stdarg.h>
-	#include <errno.h>
-	#include <fcntl.h>
-	#include <limits.h>
-	#include <dirent.h>
-	//#include <pthread.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+    #include <stdio.h>
+    #include <string.h>
+    #include <sys/time.h>
+    #include <math.h>
+    #include <float.h>
+    #include <sys/stat.h>
+    #include <stdarg.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include <limits.h>
+    #include <dirent.h>
+    #include <time.h>
+    //#include <pthread.h>
 #endif
 
 
@@ -91,34 +92,34 @@
 #define SIZE_TYPES_IN
 
 #ifdef _WIN32
-	typedef char			si1;
-	typedef unsigned char		ui1;
-	typedef short			si2;
-	typedef unsigned short		ui2;
-	typedef int			si4;
-	typedef unsigned int		ui4;
-	typedef long long int		si8;
-	typedef long long unsigned int	ui8;
-	typedef float			sf4;
-	typedef double			sf8;
-	typedef long double		sf16;   // NOTE: it often requires an explicit compiler instruction to implement true long floating point math
-						// in gcc and icc: "-Qoption,cpp,--extended_float_type"
-	typedef uint8_t 		u_int8_t;
-	typedef uint16_t 		u_int16_t;
-	typedef uint32_t 		u_int32_t;
+    typedef char			si1;
+    typedef unsigned char		ui1;
+    typedef short			si2;
+    typedef unsigned short		ui2;
+    typedef int			si4;
+    typedef unsigned int		ui4;
+    typedef long long int		si8;
+    typedef long long unsigned int	ui8;
+    typedef float			sf4;
+    typedef double			sf8;
+    typedef long double		sf16;   // NOTE: it often requires an explicit compiler instruction to implement true long floating point math
+                        // in gcc and icc: "-Qoption,cpp,--extended_float_type"
+    typedef uint8_t 		u_int8_t;
+    typedef uint16_t 		u_int16_t;
+    typedef uint32_t 		u_int32_t;
 #else
-	typedef char			si1;
-	typedef unsigned char		ui1;
-	typedef short			si2;
-	typedef unsigned short		ui2;
-	typedef int			si4;
-	typedef unsigned int		ui4;
-	typedef long int		si8;
-	typedef long unsigned int	ui8;
-	typedef float			sf4;
-	typedef double			sf8;
-	typedef long double		sf16;   // NOTE: it often requires an explicit compiler instruction to implement true long floating point math
-						// in gcc and icc: "-Qoption,cpp,--extended_float_type"
+    typedef char			si1;
+    typedef unsigned char		ui1;
+    typedef short			si2;
+    typedef unsigned short		ui2;
+    typedef int			si4;
+    typedef unsigned int		ui4;
+    typedef long int		si8;
+    typedef long unsigned int	ui8;
+    typedef float			sf4;
+    typedef double			sf8;
+    typedef long double		sf16;   // NOTE: it often requires an explicit compiler instruction to implement true long floating point math
+                        // in gcc and icc: "-Qoption,cpp,--extended_float_type"
 
 #endif
 #endif
@@ -131,40 +132,40 @@
 
 typedef struct {
         // time constants
-	si8	recording_time_offset;
-	ui4	recording_time_offset_mode;
-	si4	GMT_offset;
+    si8	recording_time_offset;
+    ui4	recording_time_offset_mode;
+    si4	GMT_offset;
         si8	DST_start_time;
         si8	DST_end_time;
-	// alignment fields
-	si4	universal_header_aligned;
-	si4	metadata_section_1_aligned;
-	si4	time_series_metadata_section_2_aligned;
-	si4	video_metadata_section_2_aligned;
-	si4	metadata_section_3_aligned;
-	si4	all_metadata_structures_aligned;
-	si4	time_series_indices_aligned;
-	si4	video_indices_aligned;
-	si4	RED_block_header_aligned;
-	si4	record_header_aligned;
-	si4	record_indices_aligned;
-	si4	all_record_structures_aligned;
-	si4	all_structures_aligned;
-	// RED
-	sf8	*RED_normal_CDF_table;
-	// CRC
-	ui4	*CRC_table;
+    // alignment fields
+    si4	universal_header_aligned;
+    si4	metadata_section_1_aligned;
+    si4	time_series_metadata_section_2_aligned;
+    si4	video_metadata_section_2_aligned;
+    si4	metadata_section_3_aligned;
+    si4	all_metadata_structures_aligned;
+    si4	time_series_indices_aligned;
+    si4	video_indices_aligned;
+    si4	RED_block_header_aligned;
+    si4	record_header_aligned;
+    si4	record_indices_aligned;
+    si4	all_record_structures_aligned;
+    si4	all_structures_aligned;
+    // RED
+    sf8	*RED_normal_CDF_table;
+    // CRC
+    ui4	*CRC_table;
         ui4	CRC_mode;
-	// AES tables
-	si4	*AES_sbox_table;
-	si4	*AES_rcon_table;
-	si4	*AES_rsbox_table;
-	// SHA256 tables
-	ui4	*SHA256_h0_table;
-	ui4	*SHA256_k_table;
-	// UTF8 tables
-	ui4	*UTF8_offsets_from_UTF8_table;
-	si1	*UTF8_trailing_bytes_for_UTF8_table;
+    // AES tables
+    si4	*AES_sbox_table;
+    si4	*AES_rcon_table;
+    si4	*AES_rsbox_table;
+    // SHA256 tables
+    ui4	*SHA256_h0_table;
+    ui4	*SHA256_k_table;
+    // UTF8 tables
+    ui4	*UTF8_offsets_from_UTF8_table;
+    si1	*UTF8_trailing_bytes_for_UTF8_table;
         // miscellaneous
         si4	verbose;
         ui4	behavior_on_fail;
@@ -606,27 +607,27 @@ typedef struct {
 
 // Universal Header Structures
 typedef struct {
-	ui4	header_CRC;
-	ui4	body_CRC;
+    ui4	header_CRC;
+    ui4	body_CRC;
         si1	file_type_string[TYPE_BYTES];
         ui1	mef_version_major;
         ui1	mef_version_minor;
         ui1	byte_order_code;
-	si8	start_time;
-	si8	end_time;
-	si8	number_of_entries;
-	si8	maximum_entry_size;
+    si8	start_time;
+    si8	end_time;
+    si8	number_of_entries;
+    si8	maximum_entry_size;
         si4	segment_number;
         si1	channel_name[MEF_BASE_FILE_NAME_BYTES]; // utf8[63], base name only, no extension
         si1	session_name[MEF_BASE_FILE_NAME_BYTES]; // utf8[63], base name only, no extension
-	si1	anonymized_name[UNIVERSAL_HEADER_ANONYMIZED_NAME_BYTES]; // utf8[63]
+    si1	anonymized_name[UNIVERSAL_HEADER_ANONYMIZED_NAME_BYTES]; // utf8[63]
         ui1	level_UUID[UUID_BYTES];
-	ui1	file_UUID[UUID_BYTES];
+    ui1	file_UUID[UUID_BYTES];
         ui1	provenance_UUID[UUID_BYTES];
-	ui1	level_1_password_validation_field[PASSWORD_VALIDATION_FIELD_BYTES];
-	ui1	level_2_password_validation_field[PASSWORD_VALIDATION_FIELD_BYTES];
+    ui1	level_1_password_validation_field[PASSWORD_VALIDATION_FIELD_BYTES];
+    ui1	level_2_password_validation_field[PASSWORD_VALIDATION_FIELD_BYTES];
         ui1	protected_region[UNIVERSAL_HEADER_PROTECTED_REGION_BYTES];
-	ui1	discretionary_region[UNIVERSAL_HEADER_DISCRETIONARY_REGION_BYTES];
+    ui1	discretionary_region[UNIVERSAL_HEADER_DISCRETIONARY_REGION_BYTES];
 } UNIVERSAL_HEADER;
 
 
@@ -644,27 +645,27 @@ typedef struct {
         si1			session_description[METADATA_SESSION_DESCRIPTION_BYTES]; // utf8[511];
         si8			recording_duration;
         // type-specific fields
-	si1			reference_description[METADATA_CHANNEL_DESCRIPTION_BYTES]; // utf8[511];
-	si8			acquisition_channel_number;
+    si1			reference_description[METADATA_CHANNEL_DESCRIPTION_BYTES]; // utf8[511];
+    si8			acquisition_channel_number;
         sf8			sampling_frequency;
         sf8			low_frequency_filter_setting;
         sf8			high_frequency_filter_setting;
-	sf8			notch_filter_frequency_setting;
-	sf8			AC_line_frequency;
+    sf8			notch_filter_frequency_setting;
+    sf8			AC_line_frequency;
         sf8			units_conversion_factor;
         si1			units_description[TIME_SERIES_METADATA_UNITS_DESCRIPTION_BYTES];	// utf8[31]
         sf8			maximum_native_sample_value;
         sf8			minimum_native_sample_value;
         si8			start_sample;
-	si8			number_of_samples;
-	si8			number_of_blocks;
-	si8			maximum_block_bytes;
-	ui4			maximum_block_samples;
+    si8			number_of_samples;
+    si8			number_of_blocks;
+    si8			maximum_block_bytes;
+    ui4			maximum_block_samples;
         ui4			maximum_difference_bytes;
-	si8			block_interval;
-	si8			number_of_discontinuities;
-	si8			maximum_contiguous_blocks;
-	si8			maximum_contiguous_block_bytes;
+    si8			block_interval;
+    si8			number_of_discontinuities;
+    si8			maximum_contiguous_blocks;
+    si8			maximum_contiguous_block_bytes;
         si8			maximum_contiguous_samples;
         ui1			protected_region[TIME_SERIES_METADATA_SECTION_2_PROTECTED_REGION_BYTES];
         ui1			discretionary_region[TIME_SERIES_METADATA_SECTION_2_DISCRETIONARY_REGION_BYTES];
@@ -679,19 +680,19 @@ typedef struct {
         si8			horizontal_resolution;
         si8			vertical_resolution;
         sf8			frame_rate;
-	si8			number_of_clips;
-	si8			maximum_clip_bytes;
+    si8			number_of_clips;
+    si8			maximum_clip_bytes;
         si1			video_format[VIDEO_METADATA_VIDEO_FORMAT_BYTES]; // utf8[31]
-	ui4			video_file_CRC;
+    ui4			video_file_CRC;
         ui1			protected_region[VIDEO_METADATA_SECTION_2_PROTECTED_REGION_BYTES];
         ui1			discretionary_region[VIDEO_METADATA_SECTION_2_DISCRETIONARY_REGION_BYTES];
 } VIDEO_METADATA_SECTION_2;
 
 typedef struct {
-	si8			recording_time_offset;
-	si8			DST_start_time;
-	si8			DST_end_time;
-	si4			GMT_offset;
+    si8			recording_time_offset;
+    si8			DST_start_time;
+    si8			DST_end_time;
+    si4			GMT_offset;
         si1			subject_name_1[METADATA_SUBJECT_NAME_BYTES]; // utf8[31]
         si1			subject_name_2[METADATA_SUBJECT_NAME_BYTES]; // utf8[31]
         si1			subject_ID[METADATA_SUBJECT_ID_BYTES]; // utf8[31]
@@ -703,20 +704,20 @@ typedef struct {
 typedef struct {
         METADATA_SECTION_1		*section_1;
         TIME_SERIES_METADATA_SECTION_2	*time_series_section_2;
-	VIDEO_METADATA_SECTION_2	*video_section_2;
+    VIDEO_METADATA_SECTION_2	*video_section_2;
         METADATA_SECTION_3		*section_3;
 } METADATA;
 
 
 // Record Structures
 typedef struct {
-	ui4	record_CRC;
-	si1	type_string[TYPE_BYTES];
-	ui1	version_major;
-	ui1	version_minor;
-	si1	encryption;
-	ui4	bytes;
-	si8	time;
+    ui4	record_CRC;
+    si1	type_string[TYPE_BYTES];
+    ui1	version_major;
+    ui1	version_minor;
+    si1	encryption;
+    ui4	bytes;
+    si8	time;
 } RECORD_HEADER;
 
 typedef struct {
@@ -730,120 +731,120 @@ typedef struct {
 
 // Block Indices Structures
 typedef struct {
-	si8	file_offset;
-	si8	start_time;
-	si8	start_sample;
-	ui4	number_of_samples;
-	ui4	block_bytes;
-	si4	maximum_sample_value;
-	si4	minimum_sample_value;
-	ui1	protected_region[TIME_SERIES_INDEX_PROTECTED_REGION_BYTES];
+    si8	file_offset;
+    si8	start_time;
+    si8	start_sample;
+    ui4	number_of_samples;
+    ui4	block_bytes;
+    si4	maximum_sample_value;
+    si4	minimum_sample_value;
+    ui1	protected_region[TIME_SERIES_INDEX_PROTECTED_REGION_BYTES];
         ui1	RED_block_flags;
         ui1	RED_block_protected_region[RED_BLOCK_PROTECTED_REGION_BYTES];
-	ui1	RED_block_discretionary_region[RED_BLOCK_DISCRETIONARY_REGION_BYTES];
+    ui1	RED_block_discretionary_region[RED_BLOCK_DISCRETIONARY_REGION_BYTES];
 } TIME_SERIES_INDEX;
 
 // Frame Indices Structures
 typedef struct {
-	si8	start_time;
-	si8	end_time;
-	ui4	start_frame;
-	ui4	end_frame;
-	si8	file_offset;
-	si8	clip_bytes;
-	ui1	protected_region[VIDEO_INDEX_PROTECTED_REGION_BYTES];
-	ui1	discretionary_region[VIDEO_INDEX_DISCRETIONARY_REGION_BYTES];
+    si8	start_time;
+    si8	end_time;
+    ui4	start_frame;
+    ui4	end_frame;
+    si8	file_offset;
+    si8	clip_bytes;
+    ui1	protected_region[VIDEO_INDEX_PROTECTED_REGION_BYTES];
+    ui1	discretionary_region[VIDEO_INDEX_DISCRETIONARY_REGION_BYTES];
 } VIDEO_INDEX;
 
 // File Processing Structures
 typedef struct {
-	si1				close_file;
-	si1				free_password_data;  // when freeing FPS
+    si1				close_file;
+    si1				free_password_data;  // when freeing FPS
         si8				io_bytes;  // bytes to read or write
         ui4				lock_mode;
-	ui4				open_mode;
+    ui4				open_mode;
 } FILE_PROCESSING_DIRECTIVES;
 
 typedef struct {
-	si1				full_file_name[MEF_FULL_FILE_NAME_BYTES];  // full path including extension
-	FILE				*fp;
+    si1				full_file_name[MEF_FULL_FILE_NAME_BYTES];  // full path including extension
+    FILE				*fp;
         si4				fd;
-	si8				file_length;
-	ui4				file_type_code;
-	UNIVERSAL_HEADER		*universal_header;
+    si8				file_length;
+    ui4				file_type_code;
+    UNIVERSAL_HEADER		*universal_header;
         FILE_PROCESSING_DIRECTIVES	directives;
-	PASSWORD_DATA			*password_data;  // this will often be the same for all files
-	METADATA			metadata;
-	TIME_SERIES_INDEX		*time_series_indices;
-	VIDEO_INDEX			*video_indices;
-	ui1				*records;
+    PASSWORD_DATA			*password_data;  // this will often be the same for all files
+    METADATA			metadata;
+    TIME_SERIES_INDEX		*time_series_indices;
+    VIDEO_INDEX			*video_indices;
+    ui1				*records;
         RECORD_INDEX			*record_indices;
         ui1				*RED_blocks;
-	si8				raw_data_bytes;
-	ui1				*raw_data;
+    si8				raw_data_bytes;
+    ui1				*raw_data;
 } FILE_PROCESSING_STRUCT;
 
 // Session, Channel, Segment Processing Structures
 typedef struct {
         si4			channel_type;
-	FILE_PROCESSING_STRUCT	*metadata_fps;
-	FILE_PROCESSING_STRUCT	*time_series_data_fps;
-	FILE_PROCESSING_STRUCT	*time_series_indices_fps;
+    FILE_PROCESSING_STRUCT	*metadata_fps;
+    FILE_PROCESSING_STRUCT	*time_series_data_fps;
+    FILE_PROCESSING_STRUCT	*time_series_indices_fps;
         FILE_PROCESSING_STRUCT	*video_indices_fps;
-	FILE_PROCESSING_STRUCT	*record_data_fps;
-	FILE_PROCESSING_STRUCT	*record_indices_fps;
-	si1			name[MEF_SEGMENT_BASE_FILE_NAME_BYTES];  // just base name, no extension
-	si1			path[MEF_FULL_FILE_NAME_BYTES];  // full path to enclosing directory (channel directory)
-	si1			channel_name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
-	si1			session_name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
-	ui1			level_UUID[UUID_BYTES];
+    FILE_PROCESSING_STRUCT	*record_data_fps;
+    FILE_PROCESSING_STRUCT	*record_indices_fps;
+    si1			name[MEF_SEGMENT_BASE_FILE_NAME_BYTES];  // just base name, no extension
+    si1			path[MEF_FULL_FILE_NAME_BYTES];  // full path to enclosing directory (channel directory)
+    si1			channel_name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
+    si1			session_name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
+    ui1			level_UUID[UUID_BYTES];
 } SEGMENT;
 
 typedef struct {
         si4			channel_type;
-	METADATA		metadata;
+    METADATA		metadata;
         FILE_PROCESSING_STRUCT	*record_data_fps;
-	FILE_PROCESSING_STRUCT	*record_indices_fps;
+    FILE_PROCESSING_STRUCT	*record_indices_fps;
         si8			number_of_segments;
-	SEGMENT			*segments;
-	si1			path[MEF_FULL_FILE_NAME_BYTES];  // full path to enclosing directory (session directory)
-	si1			name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
-	si1			extension[TYPE_BYTES];  // channel directory extension
-	si1			session_name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
-	ui1			level_UUID[UUID_BYTES];
-	si1			anonymized_name[UNIVERSAL_HEADER_ANONYMIZED_NAME_BYTES];
-	// below variables refer to segments
-	si8			maximum_number_of_records;
-	si8			maximum_record_bytes;
-	si8			earliest_start_time;
-	si8			latest_end_time;
+    SEGMENT			*segments;
+    si1			path[MEF_FULL_FILE_NAME_BYTES];  // full path to enclosing directory (session directory)
+    si1			name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
+    si1			extension[TYPE_BYTES];  // channel directory extension
+    si1			session_name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
+    ui1			level_UUID[UUID_BYTES];
+    si1			anonymized_name[UNIVERSAL_HEADER_ANONYMIZED_NAME_BYTES];
+    // below variables refer to segments
+    si8			maximum_number_of_records;
+    si8			maximum_record_bytes;
+    si8			earliest_start_time;
+    si8			latest_end_time;
 } CHANNEL;
 
 typedef struct {
-	METADATA		time_series_metadata;
+    METADATA		time_series_metadata;
         si4			number_of_time_series_channels;
-	CHANNEL			*time_series_channels;
+    CHANNEL			*time_series_channels;
         METADATA		video_metadata;
         si4			number_of_video_channels;
         CHANNEL			*video_channels;
         FILE_PROCESSING_STRUCT	*record_data_fps;
         FILE_PROCESSING_STRUCT	*record_indices_fps;
-	si1			name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
-	si1			path[MEF_FULL_FILE_NAME_BYTES];  // full path to enclosing directory
-	si1			anonymized_name[UNIVERSAL_HEADER_ANONYMIZED_NAME_BYTES];
-	ui1			level_UUID[UUID_BYTES];
-	// below variables refer to channels
-	si8			maximum_number_of_records;
-	si8			maximum_record_bytes;
-	si8			earliest_start_time;
-	si8			latest_end_time;
+    si1			name[MEF_BASE_FILE_NAME_BYTES];  // just base name, no extension
+    si1			path[MEF_FULL_FILE_NAME_BYTES];  // full path to enclosing directory
+    si1			anonymized_name[UNIVERSAL_HEADER_ANONYMIZED_NAME_BYTES];
+    ui1			level_UUID[UUID_BYTES];
+    // below variables refer to channels
+    si8			maximum_number_of_records;
+    si8			maximum_record_bytes;
+    si8			earliest_start_time;
+    si8			latest_end_time;
 } SESSION;
 
 // Miscellaneous Structures
 typedef struct NODE_STRUCT {
-	sf8			val;
-	si4			idx;
-	struct NODE_STRUCT     *prev, *next;
+    sf8			val;
+    si4			idx;
+    struct NODE_STRUCT     *prev, *next;
 } NODE;
 
 #pragma pack()
@@ -940,7 +941,7 @@ sf8			val_equals_prop(NODE *curr_node, NODE *prop_node);
 si4			write_MEF_file(FILE_PROCESSING_STRUCT *fps);
 
 #ifdef _WIN32
-	void 		slash_to_backslash(si1*);
+    void 		slash_to_backslash(si1*);
 #endif
 
 /************************************************************************************/
@@ -991,14 +992,14 @@ typedef struct {
         sf8	*denominators;
         sf8	*initial_conditions;
         si4	*orig_data;
-	si4	*filt_data;
+    si4	*filt_data;
         sf8	*sf8_filt_data;
         sf8	*sf8_buffer;
 } FILT_PROCESSING_STRUCT;
 
 typedef struct {
-	sf16	real;
-	sf16	imag;
+    sf16	real;
+    sf16	imag;
 } FILT_LONG_COMPLEX;
 
 // Prototypes
@@ -1080,8 +1081,8 @@ void			FILT_unsymmeig(sf16 **a, si4 poles, FILT_LONG_COMPLEX *eigs);
 #define RED_DETREND_DATA_DEFAULT				MEF_FALSE
 #define RED_VALIDATE_BLOCK_CRC_DEFAULT				MEF_FALSE
 #define RED_DISCONTINUITY_DEFAULT				MEF_TRUE  // if true, the dicontinuity flag will be set to true in RED_allocate_processing_struct().
-									  // Useful in combination with the "reset_discontinuity" directive as the first block in a
-									  // segment is always a discontiuity.
+                                      // Useful in combination with the "reset_discontinuity" directive as the first block in a
+                                      // segment is always a discontiuity.
 #define RED_RESET_DISCONTINUITY_DEFAULT				MEF_TRUE
 #define RED_GOAL_COMPRESSION_RATIO_DEFAULT			0.05
 #define RED_GOAL_MEAN_RESIDUAL_RATIO_DEFAULT			0.05
@@ -1101,69 +1102,69 @@ void			FILT_unsymmeig(sf16 **a, si4 poles, FILT_LONG_COMPLEX *eigs);
 // Normal cumulative distribution fucntion values from -3 to +3 standard deviations in 0.1 sigma steps
 #define RED_NORMAL_CDF_TABLE_ENTRIES	61
 #define RED_NORMAL_CDF_TABLE	      {	0.00134989803163010, 0.00186581330038404, 0.00255513033042794, 0.00346697380304067, \
-					0.00466118802371875, 0.00620966532577614, 0.00819753592459614, 0.01072411002167580, \
-					0.01390344751349860, 0.01786442056281660, 0.02275013194817920, 0.02871655981600180, \
-					0.03593031911292580, 0.04456546275854310, 0.05479929169955800, 0.06680720126885810, \
-					0.08075665923377110, 0.09680048458561040, 0.11506967022170800, 0.13566606094638300, \
-					0.15865525393145700, 0.18406012534676000, 0.21185539858339700, 0.24196365222307300, \
-					0.27425311775007400, 0.30853753872598700, 0.34457825838967600, 0.38208857781104700, \
-					0.42074029056089700, 0.46017216272297100, 0.50000000000000000, 0.53982783727702900, \
-					0.57925970943910300, 0.61791142218895300, 0.65542174161032400, 0.69146246127401300, \
-					0.72574688224992600, 0.75803634777692700, 0.78814460141660300, 0.81593987465324100, \
-					0.84134474606854300, 0.86433393905361700, 0.88493032977829200, 0.90319951541439000, \
-					0.91924334076622900, 0.93319279873114200, 0.94520070830044200, 0.95543453724145700, \
-					0.96406968088707400, 0.97128344018399800, 0.97724986805182100, 0.98213557943718300, \
-					0.98609655248650100, 0.98927588997832400, 0.99180246407540400, 0.99379033467422400, \
-					0.99533881197628100, 0.99653302619695900, 0.99744486966957200, 0.99813418669961600, \
-					0.99865010196837000 }
+                    0.00466118802371875, 0.00620966532577614, 0.00819753592459614, 0.01072411002167580, \
+                    0.01390344751349860, 0.01786442056281660, 0.02275013194817920, 0.02871655981600180, \
+                    0.03593031911292580, 0.04456546275854310, 0.05479929169955800, 0.06680720126885810, \
+                    0.08075665923377110, 0.09680048458561040, 0.11506967022170800, 0.13566606094638300, \
+                    0.15865525393145700, 0.18406012534676000, 0.21185539858339700, 0.24196365222307300, \
+                    0.27425311775007400, 0.30853753872598700, 0.34457825838967600, 0.38208857781104700, \
+                    0.42074029056089700, 0.46017216272297100, 0.50000000000000000, 0.53982783727702900, \
+                    0.57925970943910300, 0.61791142218895300, 0.65542174161032400, 0.69146246127401300, \
+                    0.72574688224992600, 0.75803634777692700, 0.78814460141660300, 0.81593987465324100, \
+                    0.84134474606854300, 0.86433393905361700, 0.88493032977829200, 0.90319951541439000, \
+                    0.91924334076622900, 0.93319279873114200, 0.94520070830044200, 0.95543453724145700, \
+                    0.96406968088707400, 0.97128344018399800, 0.97724986805182100, 0.98213557943718300, \
+                    0.98609655248650100, 0.98927588997832400, 0.99180246407540400, 0.99379033467422400, \
+                    0.99533881197628100, 0.99653302619695900, 0.99744486966957200, 0.99813418669961600, \
+                    0.99865010196837000 }
 
 #define RED_SUM_NORMAL_CDF		30.5
 #define RED_SUM_SQ_NORMAL_CDF		24.864467406647070
 
 // Typedefs & Structures
 typedef struct {
-	ui4	block_CRC;
-	ui1	flags;
+    ui4	block_CRC;
+    ui1	flags;
         ui1	protected_region[RED_BLOCK_PROTECTED_REGION_BYTES];
         ui1	discretionary_region[RED_BLOCK_DISCRETIONARY_REGION_BYTES];
         sf4	detrend_slope;
         sf4	detrend_intercept;
-	sf4	scale_factor;
-	ui4	difference_bytes;
-	ui4	number_of_samples;
-	ui4	block_bytes;
-	si8	start_time;
-	ui1	statistics[RED_BLOCK_STATISTICS_BYTES];
+    sf4	scale_factor;
+    ui4	difference_bytes;
+    ui4	number_of_samples;
+    ui4	block_bytes;
+    si8	start_time;
+    ui1	statistics[RED_BLOCK_STATISTICS_BYTES];
 } RED_BLOCK_HEADER;
 
 typedef struct {
         si1			encryption_level;  // encryption level for data blocks, passed in compression, returned in decompression
         si1			discontinuity;  // set if block is first after a discontinuity, passed in compression, returned in decompression
         si1			detrend_data;  // set if block is to be detrended (somewhat useful in lossless, more useful in lossy compression)
-	si1			return_lossy_data;  // if set, lossy data returned in decompressed_data during lossy compression
-	si1			reset_discontinuity;  // if discontinuity directive == MEF_TRUE, reset to MEF_FALSE after compressing the block
+    si1			return_lossy_data;  // if set, lossy data returned in decompressed_data during lossy compression
+    si1			reset_discontinuity;  // if discontinuity directive == MEF_TRUE, reset to MEF_FALSE after compressing the block
         si1			require_normality;  // in lossy compression, lossless compression will be performed in blocks whose samples are not approximately normally distributed
         sf8			normal_correlation;  // if require_normality is set, the correlation of the sample distribution with a normal distribution must be >= this number (range -1.0 to 1.0)
 } RED_PROCESSING_DIRECTIVES;
 
 typedef struct {
-	ui1			mode;  // compression mode
-	sf8			goal_compression_ratio;  // goal value passed
-	sf8			actual_compression_ratio;  // actual value returned in RED_FIXED_COMPRESSION_RATIO mode
-	sf8			goal_mean_residual_ratio;  // goal value passed
-	sf8			actual_mean_residual_ratio;  // actual value returned in RED_MEAN_RESIDUAL_RATIO mode
-	sf8			goal_tolerance;  // tolerance for lossy compression mode goal, value of <= 0.0 uses default values, which are returned
-	si4			maximum_rounds_per_block;  // maximum loops to attain goal compression
+    ui1			mode;  // compression mode
+    sf8			goal_compression_ratio;  // goal value passed
+    sf8			actual_compression_ratio;  // actual value returned in RED_FIXED_COMPRESSION_RATIO mode
+    sf8			goal_mean_residual_ratio;  // goal value passed
+    sf8			actual_mean_residual_ratio;  // actual value returned in RED_MEAN_RESIDUAL_RATIO mode
+    sf8			goal_tolerance;  // tolerance for lossy compression mode goal, value of <= 0.0 uses default values, which are returned
+    si4			maximum_rounds_per_block;  // maximum loops to attain goal compression
 } RED_COMPRESSION_PARAMETERS;
 
 typedef struct {
         ui4				counts[RED_BLOCK_STATISTICS_BYTES + 1];  // used by RED_encode & RED_decode
         PASSWORD_DATA			*password_data;  // passed in compression & decompression
-	RED_COMPRESSION_PARAMETERS	compression;
-	RED_PROCESSING_DIRECTIVES	directives;
+    RED_COMPRESSION_PARAMETERS	compression;
+    RED_PROCESSING_DIRECTIVES	directives;
         si1				*difference_buffer;  // passed in both compression & decompression
         ui1				*compressed_data;  // passed in decompression, returned in compression, should not be updated
-	RED_BLOCK_HEADER		*block_header; // points to beginning of current block within compressed_data array, updatable
+    RED_BLOCK_HEADER		*block_header; // points to beginning of current block within compressed_data array, updatable
         si4				*decompressed_data;  // returned in decompression or if lossy data requested, used in some compression modes, should not be updated
         si4				*decompressed_ptr;  // points to beginning of current block within decompressed_data array, updatable
         si4				*original_data;  // passed in compression, should not be updated
@@ -1207,69 +1208,69 @@ RED_BLOCK_HEADER	*RED_update_RPS_pointers(RED_PROCESSING_STRUCT *rps, ui1 flags)
 
 
 #define CRC_KOOPMAN32_KEY     {	0x00000000, 0x9695C4CA, 0xFB4839C9, 0x6DDDFD03, \
-				0x20F3C3CF, 0xB6660705, 0xDBBBFA06, 0x4D2E3ECC, \
-				0x41E7879E, 0xD7724354, 0xBAAFBE57, 0x2C3A7A9D, \
-				0x61144451, 0xF781809B, 0x9A5C7D98, 0x0CC9B952, \
-				0x83CF0F3C, 0x155ACBF6, 0x788736F5, 0xEE12F23F, \
-				0xA33CCCF3, 0x35A90839, 0x5874F53A, 0xCEE131F0, \
-				0xC22888A2, 0x54BD4C68, 0x3960B16B, 0xAFF575A1, \
-				0xE2DB4B6D, 0x744E8FA7,	0x199372A4, 0x8F06B66E, \
-				0xD1FDAE25, 0x47686AEF, 0x2AB597EC, 0xBC205326, \
-				0xF10E6DEA, 0x679BA920, 0x0A465423, 0x9CD390E9, \
-				0x901A29BB, 0x068FED71, 0x6B521072, 0xFDC7D4B8, \
-				0xB0E9EA74, 0x267C2EBE, 0x4BA1D3BD, 0xDD341777, \
-				0x5232A119, 0xC4A765D3, 0xA97A98D0, 0x3FEF5C1A, \
-				0x72C162D6, 0xE454A61C, 0x89895B1F, 0x1F1C9FD5, \
-				0x13D52687, 0x8540E24D, 0xE89D1F4E, 0x7E08DB84, \
-				0x3326E548, 0xA5B32182, 0xC86EDC81, 0x5EFB184B, \
-				0x7598EC17, 0xE30D28DD, 0x8ED0D5DE, 0x18451114, \
-				0x556B2FD8, 0xC3FEEB12, 0xAE231611, 0x38B6D2DB, \
-				0x347F6B89, 0xA2EAAF43, 0xCF375240, 0x59A2968A, \
-				0x148CA846, 0x82196C8C, 0xEFC4918F, 0x79515545, \
-				0xF657E32B, 0x60C227E1, 0x0D1FDAE2, 0x9B8A1E28, \
-				0xD6A420E4, 0x4031E42E, 0x2DEC192D, 0xBB79DDE7, \
-				0xB7B064B5, 0x2125A07F, 0x4CF85D7C, 0xDA6D99B6, \
-				0x9743A77A, 0x01D663B0, 0x6C0B9EB3, 0xFA9E5A79, \
-				0xA4654232, 0x32F086F8, 0x5F2D7BFB, 0xC9B8BF31, \
-				0x849681FD, 0x12034537, 0x7FDEB834, 0xE94B7CFE, \
-				0xE582C5AC, 0x73170166, 0x1ECAFC65, 0x885F38AF, \
-				0xC5710663, 0x53E4C2A9, 0x3E393FAA, 0xA8ACFB60, \
-				0x27AA4D0E, 0xB13F89C4, 0xDCE274C7, 0x4A77B00D, \
-				0x07598EC1, 0x91CC4A0B, 0xFC11B708, 0x6A8473C2, \
-				0x664DCA90, 0xF0D80E5A, 0x9D05F359, 0x0B903793, \
-				0x46BE095F, 0xD02BCD95, 0xBDF63096, 0x2B63F45C, \
-				0xEB31D82E, 0x7DA41CE4, 0x1079E1E7, 0x86EC252D, \
-				0xCBC21BE1, 0x5D57DF2B, 0x308A2228, 0xA61FE6E2, \
-				0xAAD65FB0, 0x3C439B7A, 0x519E6679, 0xC70BA2B3, \
-				0x8A259C7F, 0x1CB058B5, 0x716DA5B6, 0xE7F8617C, \
-				0x68FED712, 0xFE6B13D8, 0x93B6EEDB, 0x05232A11, \
-				0x480D14DD, 0xDE98D017, 0xB3452D14, 0x25D0E9DE, \
-				0x2919508C, 0xBF8C9446, 0xD2516945, 0x44C4AD8F, \
-				0x09EA9343, 0x9F7F5789, 0xF2A2AA8A, 0x64376E40, \
-				0x3ACC760B, 0xAC59B2C1, 0xC1844FC2, 0x57118B08, \
-				0x1A3FB5C4, 0x8CAA710E, 0xE1778C0D, 0x77E248C7, \
-				0x7B2BF195, 0xEDBE355F, 0x8063C85C, 0x16F60C96, \
-				0x5BD8325A, 0xCD4DF690, 0xA0900B93, 0x3605CF59, \
-				0xB9037937, 0x2F96BDFD, 0x424B40FE, 0xD4DE8434, \
-				0x99F0BAF8, 0x0F657E32, 0x62B88331, 0xF42D47FB, \
-				0xF8E4FEA9, 0x6E713A63, 0x03ACC760, 0x953903AA, \
-				0xD8173D66, 0x4E82F9AC, 0x235F04AF, 0xB5CAC065, \
-				0x9EA93439, 0x083CF0F3, 0x65E10DF0, 0xF374C93A, \
-				0xBE5AF7F6, 0x28CF333C, 0x4512CE3F, 0xD3870AF5, \
-				0xDF4EB3A7, 0x49DB776D, 0x24068A6E, 0xB2934EA4, \
-				0xFFBD7068, 0x6928B4A2, 0x04F549A1, 0x92608D6B, \
-				0x1D663B05, 0x8BF3FFCF, 0xE62E02CC, 0x70BBC606, \
-				0x3D95F8CA, 0xAB003C00, 0xC6DDC103, 0x504805C9, \
-				0x5C81BC9B, 0xCA147851, 0xA7C98552, 0x315C4198, \
-				0x7C727F54, 0xEAE7BB9E, 0x873A469D, 0x11AF8257, \
-				0x4F549A1C, 0xD9C15ED6, 0xB41CA3D5, 0x2289671F, \
-				0x6FA759D3, 0xF9329D19, 0x94EF601A, 0x027AA4D0, \
-				0x0EB31D82, 0x9826D948, 0xF5FB244B, 0x636EE081, \
-				0x2E40DE4D, 0xB8D51A87, 0xD508E784, 0x439D234E, \
-				0xCC9B9520, 0x5A0E51EA, 0x37D3ACE9, 0xA1466823, \
-				0xEC6856EF, 0x7AFD9225, 0x17206F26, 0x81B5ABEC, \
-				0x8D7C12BE, 0x1BE9D674, 0x76342B77, 0xE0A1EFBD, \
-				0xAD8FD171, 0x3B1A15BB, 0x56C7E8B8, 0xC0522C72 }
+                0x20F3C3CF, 0xB6660705, 0xDBBBFA06, 0x4D2E3ECC, \
+                0x41E7879E, 0xD7724354, 0xBAAFBE57, 0x2C3A7A9D, \
+                0x61144451, 0xF781809B, 0x9A5C7D98, 0x0CC9B952, \
+                0x83CF0F3C, 0x155ACBF6, 0x788736F5, 0xEE12F23F, \
+                0xA33CCCF3, 0x35A90839, 0x5874F53A, 0xCEE131F0, \
+                0xC22888A2, 0x54BD4C68, 0x3960B16B, 0xAFF575A1, \
+                0xE2DB4B6D, 0x744E8FA7,	0x199372A4, 0x8F06B66E, \
+                0xD1FDAE25, 0x47686AEF, 0x2AB597EC, 0xBC205326, \
+                0xF10E6DEA, 0x679BA920, 0x0A465423, 0x9CD390E9, \
+                0x901A29BB, 0x068FED71, 0x6B521072, 0xFDC7D4B8, \
+                0xB0E9EA74, 0x267C2EBE, 0x4BA1D3BD, 0xDD341777, \
+                0x5232A119, 0xC4A765D3, 0xA97A98D0, 0x3FEF5C1A, \
+                0x72C162D6, 0xE454A61C, 0x89895B1F, 0x1F1C9FD5, \
+                0x13D52687, 0x8540E24D, 0xE89D1F4E, 0x7E08DB84, \
+                0x3326E548, 0xA5B32182, 0xC86EDC81, 0x5EFB184B, \
+                0x7598EC17, 0xE30D28DD, 0x8ED0D5DE, 0x18451114, \
+                0x556B2FD8, 0xC3FEEB12, 0xAE231611, 0x38B6D2DB, \
+                0x347F6B89, 0xA2EAAF43, 0xCF375240, 0x59A2968A, \
+                0x148CA846, 0x82196C8C, 0xEFC4918F, 0x79515545, \
+                0xF657E32B, 0x60C227E1, 0x0D1FDAE2, 0x9B8A1E28, \
+                0xD6A420E4, 0x4031E42E, 0x2DEC192D, 0xBB79DDE7, \
+                0xB7B064B5, 0x2125A07F, 0x4CF85D7C, 0xDA6D99B6, \
+                0x9743A77A, 0x01D663B0, 0x6C0B9EB3, 0xFA9E5A79, \
+                0xA4654232, 0x32F086F8, 0x5F2D7BFB, 0xC9B8BF31, \
+                0x849681FD, 0x12034537, 0x7FDEB834, 0xE94B7CFE, \
+                0xE582C5AC, 0x73170166, 0x1ECAFC65, 0x885F38AF, \
+                0xC5710663, 0x53E4C2A9, 0x3E393FAA, 0xA8ACFB60, \
+                0x27AA4D0E, 0xB13F89C4, 0xDCE274C7, 0x4A77B00D, \
+                0x07598EC1, 0x91CC4A0B, 0xFC11B708, 0x6A8473C2, \
+                0x664DCA90, 0xF0D80E5A, 0x9D05F359, 0x0B903793, \
+                0x46BE095F, 0xD02BCD95, 0xBDF63096, 0x2B63F45C, \
+                0xEB31D82E, 0x7DA41CE4, 0x1079E1E7, 0x86EC252D, \
+                0xCBC21BE1, 0x5D57DF2B, 0x308A2228, 0xA61FE6E2, \
+                0xAAD65FB0, 0x3C439B7A, 0x519E6679, 0xC70BA2B3, \
+                0x8A259C7F, 0x1CB058B5, 0x716DA5B6, 0xE7F8617C, \
+                0x68FED712, 0xFE6B13D8, 0x93B6EEDB, 0x05232A11, \
+                0x480D14DD, 0xDE98D017, 0xB3452D14, 0x25D0E9DE, \
+                0x2919508C, 0xBF8C9446, 0xD2516945, 0x44C4AD8F, \
+                0x09EA9343, 0x9F7F5789, 0xF2A2AA8A, 0x64376E40, \
+                0x3ACC760B, 0xAC59B2C1, 0xC1844FC2, 0x57118B08, \
+                0x1A3FB5C4, 0x8CAA710E, 0xE1778C0D, 0x77E248C7, \
+                0x7B2BF195, 0xEDBE355F, 0x8063C85C, 0x16F60C96, \
+                0x5BD8325A, 0xCD4DF690, 0xA0900B93, 0x3605CF59, \
+                0xB9037937, 0x2F96BDFD, 0x424B40FE, 0xD4DE8434, \
+                0x99F0BAF8, 0x0F657E32, 0x62B88331, 0xF42D47FB, \
+                0xF8E4FEA9, 0x6E713A63, 0x03ACC760, 0x953903AA, \
+                0xD8173D66, 0x4E82F9AC, 0x235F04AF, 0xB5CAC065, \
+                0x9EA93439, 0x083CF0F3, 0x65E10DF0, 0xF374C93A, \
+                0xBE5AF7F6, 0x28CF333C, 0x4512CE3F, 0xD3870AF5, \
+                0xDF4EB3A7, 0x49DB776D, 0x24068A6E, 0xB2934EA4, \
+                0xFFBD7068, 0x6928B4A2, 0x04F549A1, 0x92608D6B, \
+                0x1D663B05, 0x8BF3FFCF, 0xE62E02CC, 0x70BBC606, \
+                0x3D95F8CA, 0xAB003C00, 0xC6DDC103, 0x504805C9, \
+                0x5C81BC9B, 0xCA147851, 0xA7C98552, 0x315C4198, \
+                0x7C727F54, 0xEAE7BB9E, 0x873A469D, 0x11AF8257, \
+                0x4F549A1C, 0xD9C15ED6, 0xB41CA3D5, 0x2289671F, \
+                0x6FA759D3, 0xF9329D19, 0x94EF601A, 0x027AA4D0, \
+                0x0EB31D82, 0x9826D948, 0xF5FB244B, 0x636EE081, \
+                0x2E40DE4D, 0xB8D51A87, 0xD508E784, 0x439D234E, \
+                0xCC9B9520, 0x5A0E51EA, 0x37D3ACE9, 0xA1466823, \
+                0xEC6856EF, 0x7AFD9225, 0x17206F26, 0x81B5ABEC, \
+                0x8D7C12BE, 0x1BE9D674, 0x76342B77, 0xE0A1EFBD, \
+                0xAD8FD171, 0x3B1A15BB, 0x56C7E8B8, 0xC0522C72 }
 
 // Function Prototypes
 ui4	CRC_calculate(ui1 *block_ptr, si8 block_bytes);
@@ -1309,13 +1310,13 @@ si4	CRC_validate(ui1 *block_ptr, si8 block_bytes, ui4 crc_to_validate);
 
 #define TRAILING_BYTES_FOR_UTF8_TABLE_ENTRIES	256
 #define TRAILING_BYTES_FOR_UTF8	{	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
-					1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, \
-					2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, 3,3,3,3,3,3,3,3,4,4,4,4,5,5,5,5 }
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, \
+                    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, \
+                    2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, 3,3,3,3,3,3,3,3,4,4,4,4,5,5,5,5 }
 
 
 
@@ -1382,57 +1383,57 @@ si4	UTF8_wc_toutf8(si1 *dest, ui4 ch);  // single character to UTF-8
 
 #define AES_SBOX_ENTRIES	256
 #define AES_SBOX {	0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76, \
-			0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0, \
-			0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15, \
-			0x04, 0xc7, 0x23, 0xc3, 0x18, 0x96, 0x05, 0x9a, 0x07, 0x12, 0x80, 0xe2, 0xeb, 0x27, 0xb2, 0x75, \
-			0x09, 0x83, 0x2c, 0x1a, 0x1b, 0x6e, 0x5a, 0xa0, 0x52, 0x3b, 0xd6, 0xb3, 0x29, 0xe3, 0x2f, 0x84, \
-			0x53, 0xd1, 0x00, 0xed, 0x20, 0xfc, 0xb1, 0x5b, 0x6a, 0xcb, 0xbe, 0x39, 0x4a, 0x4c, 0x58, 0xcf, \
-			0xd0, 0xef, 0xaa, 0xfb, 0x43, 0x4d, 0x33, 0x85, 0x45, 0xf9, 0x02, 0x7f, 0x50, 0x3c, 0x9f, 0xa8, \
-			0x51, 0xa3, 0x40, 0x8f, 0x92, 0x9d, 0x38, 0xf5, 0xbc, 0xb6, 0xda, 0x21, 0x10, 0xff, 0xf3, 0xd2, \
-			0xcd, 0x0c, 0x13, 0xec, 0x5f, 0x97, 0x44, 0x17, 0xc4, 0xa7, 0x7e, 0x3d, 0x64, 0x5d, 0x19, 0x73, \
-			0x60, 0x81, 0x4f, 0xdc, 0x22, 0x2a, 0x90, 0x88, 0x46, 0xee, 0xb8, 0x14, 0xde, 0x5e, 0x0b, 0xdb, \
-			0xe0, 0x32, 0x3a, 0x0a, 0x49, 0x06, 0x24, 0x5c, 0xc2, 0xd3, 0xac, 0x62, 0x91, 0x95, 0xe4, 0x79, \
-			0xe7, 0xc8, 0x37, 0x6d, 0x8d, 0xd5, 0x4e, 0xa9, 0x6c, 0x56, 0xf4, 0xea, 0x65, 0x7a, 0xae, 0x08, \
-			0xba, 0x78, 0x25, 0x2e, 0x1c, 0xa6, 0xb4, 0xc6, 0xe8, 0xdd, 0x74, 0x1f, 0x4b, 0xbd, 0x8b, 0x8a, \
-			0x70, 0x3e, 0xb5, 0x66, 0x48, 0x03, 0xf6, 0x0e, 0x61, 0x35, 0x57, 0xb9, 0x86, 0xc1, 0x1d, 0x9e, \
-			0xe1, 0xf8, 0x98, 0x11, 0x69, 0xd9, 0x8e, 0x94, 0x9b, 0x1e, 0x87, 0xe9, 0xce, 0x55, 0x28, 0xdf, \
-			0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16 }
+            0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0, \
+            0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15, \
+            0x04, 0xc7, 0x23, 0xc3, 0x18, 0x96, 0x05, 0x9a, 0x07, 0x12, 0x80, 0xe2, 0xeb, 0x27, 0xb2, 0x75, \
+            0x09, 0x83, 0x2c, 0x1a, 0x1b, 0x6e, 0x5a, 0xa0, 0x52, 0x3b, 0xd6, 0xb3, 0x29, 0xe3, 0x2f, 0x84, \
+            0x53, 0xd1, 0x00, 0xed, 0x20, 0xfc, 0xb1, 0x5b, 0x6a, 0xcb, 0xbe, 0x39, 0x4a, 0x4c, 0x58, 0xcf, \
+            0xd0, 0xef, 0xaa, 0xfb, 0x43, 0x4d, 0x33, 0x85, 0x45, 0xf9, 0x02, 0x7f, 0x50, 0x3c, 0x9f, 0xa8, \
+            0x51, 0xa3, 0x40, 0x8f, 0x92, 0x9d, 0x38, 0xf5, 0xbc, 0xb6, 0xda, 0x21, 0x10, 0xff, 0xf3, 0xd2, \
+            0xcd, 0x0c, 0x13, 0xec, 0x5f, 0x97, 0x44, 0x17, 0xc4, 0xa7, 0x7e, 0x3d, 0x64, 0x5d, 0x19, 0x73, \
+            0x60, 0x81, 0x4f, 0xdc, 0x22, 0x2a, 0x90, 0x88, 0x46, 0xee, 0xb8, 0x14, 0xde, 0x5e, 0x0b, 0xdb, \
+            0xe0, 0x32, 0x3a, 0x0a, 0x49, 0x06, 0x24, 0x5c, 0xc2, 0xd3, 0xac, 0x62, 0x91, 0x95, 0xe4, 0x79, \
+            0xe7, 0xc8, 0x37, 0x6d, 0x8d, 0xd5, 0x4e, 0xa9, 0x6c, 0x56, 0xf4, 0xea, 0x65, 0x7a, 0xae, 0x08, \
+            0xba, 0x78, 0x25, 0x2e, 0x1c, 0xa6, 0xb4, 0xc6, 0xe8, 0xdd, 0x74, 0x1f, 0x4b, 0xbd, 0x8b, 0x8a, \
+            0x70, 0x3e, 0xb5, 0x66, 0x48, 0x03, 0xf6, 0x0e, 0x61, 0x35, 0x57, 0xb9, 0x86, 0xc1, 0x1d, 0x9e, \
+            0xe1, 0xf8, 0x98, 0x11, 0x69, 0xd9, 0x8e, 0x94, 0x9b, 0x1e, 0x87, 0xe9, 0xce, 0x55, 0x28, 0xdf, \
+            0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16 }
 
 #define AES_RSBOX_ENTRIES	256
 #define AES_RSBOX {	0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb, \
-			0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb, \
-			0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e, \
-			0x08, 0x2e, 0xa1, 0x66, 0x28, 0xd9, 0x24, 0xb2, 0x76, 0x5b, 0xa2, 0x49, 0x6d, 0x8b, 0xd1, 0x25, \
-			0x72, 0xf8, 0xf6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xd4, 0xa4, 0x5c, 0xcc, 0x5d, 0x65, 0xb6, 0x92, \
-			0x6c, 0x70, 0x48, 0x50, 0xfd, 0xed, 0xb9, 0xda, 0x5e, 0x15, 0x46, 0x57, 0xa7, 0x8d, 0x9d, 0x84, \
-			0x90, 0xd8, 0xab, 0x00, 0x8c, 0xbc, 0xd3, 0x0a, 0xf7, 0xe4, 0x58, 0x05, 0xb8, 0xb3, 0x45, 0x06, \
-			0xd0, 0x2c, 0x1e, 0x8f, 0xca, 0x3f, 0x0f, 0x02, 0xc1, 0xaf, 0xbd, 0x03, 0x01, 0x13, 0x8a, 0x6b, \
-			0x3a, 0x91, 0x11, 0x41, 0x4f, 0x67, 0xdc, 0xea, 0x97, 0xf2, 0xcf, 0xce, 0xf0, 0xb4, 0xe6, 0x73, \
-			0x96, 0xac, 0x74, 0x22, 0xe7, 0xad, 0x35, 0x85, 0xe2, 0xf9, 0x37, 0xe8, 0x1c, 0x75, 0xdf, 0x6e, \
-			0x47, 0xf1, 0x1a, 0x71, 0x1d, 0x29, 0xc5, 0x89, 0x6f, 0xb7, 0x62, 0x0e, 0xaa, 0x18, 0xbe, 0x1b, \
-			0xfc, 0x56, 0x3e, 0x4b, 0xc6, 0xd2, 0x79, 0x20, 0x9a, 0xdb, 0xc0, 0xfe, 0x78, 0xcd, 0x5a, 0xf4, \
-			0x1f, 0xdd, 0xa8, 0x33, 0x88, 0x07, 0xc7, 0x31, 0xb1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xec, 0x5f, \
-			0x60, 0x51, 0x7f, 0xa9, 0x19, 0xb5, 0x4a, 0x0d, 0x2d, 0xe5, 0x7a, 0x9f, 0x93, 0xc9, 0x9c, 0xef, \
-			0xa0, 0xe0, 0x3b, 0x4d, 0xae, 0x2a, 0xf5, 0xb0, 0xc8, 0xeb, 0xbb, 0x3c, 0x83, 0x53, 0x99, 0x61, \
-			0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d };
+            0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb, \
+            0x54, 0x7b, 0x94, 0x32, 0xa6, 0xc2, 0x23, 0x3d, 0xee, 0x4c, 0x95, 0x0b, 0x42, 0xfa, 0xc3, 0x4e, \
+            0x08, 0x2e, 0xa1, 0x66, 0x28, 0xd9, 0x24, 0xb2, 0x76, 0x5b, 0xa2, 0x49, 0x6d, 0x8b, 0xd1, 0x25, \
+            0x72, 0xf8, 0xf6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xd4, 0xa4, 0x5c, 0xcc, 0x5d, 0x65, 0xb6, 0x92, \
+            0x6c, 0x70, 0x48, 0x50, 0xfd, 0xed, 0xb9, 0xda, 0x5e, 0x15, 0x46, 0x57, 0xa7, 0x8d, 0x9d, 0x84, \
+            0x90, 0xd8, 0xab, 0x00, 0x8c, 0xbc, 0xd3, 0x0a, 0xf7, 0xe4, 0x58, 0x05, 0xb8, 0xb3, 0x45, 0x06, \
+            0xd0, 0x2c, 0x1e, 0x8f, 0xca, 0x3f, 0x0f, 0x02, 0xc1, 0xaf, 0xbd, 0x03, 0x01, 0x13, 0x8a, 0x6b, \
+            0x3a, 0x91, 0x11, 0x41, 0x4f, 0x67, 0xdc, 0xea, 0x97, 0xf2, 0xcf, 0xce, 0xf0, 0xb4, 0xe6, 0x73, \
+            0x96, 0xac, 0x74, 0x22, 0xe7, 0xad, 0x35, 0x85, 0xe2, 0xf9, 0x37, 0xe8, 0x1c, 0x75, 0xdf, 0x6e, \
+            0x47, 0xf1, 0x1a, 0x71, 0x1d, 0x29, 0xc5, 0x89, 0x6f, 0xb7, 0x62, 0x0e, 0xaa, 0x18, 0xbe, 0x1b, \
+            0xfc, 0x56, 0x3e, 0x4b, 0xc6, 0xd2, 0x79, 0x20, 0x9a, 0xdb, 0xc0, 0xfe, 0x78, 0xcd, 0x5a, 0xf4, \
+            0x1f, 0xdd, 0xa8, 0x33, 0x88, 0x07, 0xc7, 0x31, 0xb1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xec, 0x5f, \
+            0x60, 0x51, 0x7f, 0xa9, 0x19, 0xb5, 0x4a, 0x0d, 0x2d, 0xe5, 0x7a, 0x9f, 0x93, 0xc9, 0x9c, 0xef, \
+            0xa0, 0xe0, 0x3b, 0x4d, 0xae, 0x2a, 0xf5, 0xb0, 0xc8, 0xeb, 0xbb, 0x3c, 0x83, 0x53, 0x99, 0x61, \
+            0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d };
 
 #define AES_RCON_ENTRIES	255
 #define AES_RCON {	0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, \
-			0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, \
-			0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, \
-			0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, \
-			0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, \
-			0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, \
-			0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, \
-			0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, \
-			0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, \
-			0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, \
-			0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, \
-			0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, \
-			0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, \
-			0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, \
-			0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, \
-			0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb };
+            0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, \
+            0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, \
+            0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, \
+            0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, \
+            0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, \
+            0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, \
+            0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, \
+            0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, \
+            0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, \
+            0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, \
+            0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, \
+            0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, \
+            0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, \
+            0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, \
+            0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb };
 
 
 // Function Prototypes
@@ -1504,25 +1505,25 @@ void	AES_sub_bytes(ui1 state[][4]);
 
 #define SHA256_H0_ENTRIES	8
 #define SHA256_H0 {	0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, \
-			0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19 }
+            0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19 }
 
 #define SHA256_K_ENTRIES	64
 #define SHA256_K {	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, \
-			0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5, \
-			0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, \
-			0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, \
-			0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, \
-			0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, \
-			0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, \
-			0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, \
-			0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, \
-			0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, \
-			0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, \
-			0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070, \
-			0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, \
-			0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, \
-			0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, \
-			0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2 }
+            0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5, \
+            0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, \
+            0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, \
+            0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, \
+            0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, \
+            0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, \
+            0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, \
+            0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, \
+            0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, \
+            0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, \
+            0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070, \
+            0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, \
+            0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, \
+            0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, \
+            0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2 }
 
 // Macros
 #define SHFR(x, n)	(x >> n)
@@ -1546,10 +1547,10 @@ void	AES_sub_bytes(ui1 state[][4]);
 
 // Typedefs & Structures
 typedef struct {
-	ui4	tot_len;
-	ui4	len;
-	ui1	block[2 * SHA256_BLOCK_SIZE];
-	ui4	h[8];
+    ui4	tot_len;
+    ui4	len;
+    ui1	block[2 * SHA256_BLOCK_SIZE];
+    ui4	h[8];
 } SHA256_ctx;
 
 // Function Prototypes
